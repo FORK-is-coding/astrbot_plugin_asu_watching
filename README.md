@@ -1,6 +1,6 @@
 # 阿酥盯盘器（astrbot_plugin_creator_feed）
 
-> GitHub 仓库：[FORK-is-coding/AsuWatching](https://github.com/FORK-is-coding/AsuWatching)
+> GitHub 仓库：[FORK-is-coding/astrbot_plugin_asu_watching](https://github.com/FORK-is-coding/astrbot_plugin_asu_watching)
 
 秋招酥化快人一步！盯住阿酥在coding的小红书、GitHub、X 的动向，学习酥思想、争做酥青年，永远跟酥走，通过 QQ 指令查询、WebUI 面板查看，并支持定时推送。
 > 酥神我真的好↓喜↑欢你啊，为了你，我要唱朋友的酒！（使用空城计技能）
@@ -28,7 +28,7 @@
 1. 将本目录放到 AstrBot 的 `data/plugins/` 下（目录名 `astrbot_plugin_creator_feed`），或直接：
 
 ```bash
-git clone https://github.com/FORK-is-coding/AsuWatching data/plugins/astrbot_plugin_creator_feed
+git clone https://github.com/FORK-is-coding/astrbot_plugin_asu_watching data/plugins/astrbot_plugin_creator_feed
 ```
 2. 重载插件。
 3. 在 WebUI 的插件配置里填写：

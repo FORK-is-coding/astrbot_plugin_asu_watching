@@ -4,7 +4,7 @@ desc: 订阅小红书、GitHub、X 创作者的最新动向，支持 QQ 指令�
 short_desc: 阿酥盯盘：多平台动向、AI 摘要与推送
 version: 0.1.0
 author: LofiSu
-repo: https://github.com/FORK-is-coding/AsuWatching
+repo: https://github.com/FORK-is-coding/astrbot_plugin_asu_watching
 astrbot_version: ">=4.29,<5"
 support_platforms:
   - aiocqhttp
