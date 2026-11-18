@@ -2,7 +2,8 @@
 
 > GitHub 仓库：[FORK-is-coding/AsuWatching](https://github.com/FORK-is-coding/AsuWatching)
 
-盯住小红书、GitHub、X 创作者的动向，通过 QQ 指令查询、WebUI 面板查看，并支持定时推送。
+秋招酥化快人一步！盯住阿酥在coding的小红书、GitHub、X 的动向，学习酥思想、争做酥青年，永远跟酥走，通过 QQ 指令查询、WebUI 面板查看，并支持定时推送。
+> 酥神我真的好↓喜↑欢你啊，为了你，我要唱朋友的酒！（使用空城计技能）
 
 ## 当前状态
 
