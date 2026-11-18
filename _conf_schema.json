@@ -1,0 +1,204 @@
+{
+  "github_token": {
+    "type": "string",
+    "description": "GitHub Token（只读 public 即可，留空则匿名 60 次/时）",
+    "default": "",
+    "secret": true
+  },
+  "twitter_provider": {
+    "type": "string",
+    "description": "X 数据源",
+    "default": "fxtwitter",
+    "options": ["fxtwitter", "x_api"]
+  },
+  "twitter_bearer_token": {
+    "type": "string",
+    "description": "X API v2 Bearer Token（provider=x_api 时必填）",
+    "default": "",
+    "secret": true
+  },
+  "xhs_provider": {
+    "type": "string",
+    "description": "小红书数据源：cookie=插件扫码登录，rsshub=自建实例",
+    "default": "cookie",
+    "options": ["cookie", "rsshub"]
+  },
+  "rsshub_base": {
+    "type": "string",
+    "description": "仅 xhs_provider=rsshub 时使用",
+    "default": ""
+  },
+  "rsshub_access_key": {
+    "type": "string",
+    "description": "RSSHub ACCESS_KEY（可选）",
+    "default": "",
+    "secret": true
+  },
+  "watch_targets": {
+    "type": "template_list",
+    "description": "盯住的账号",
+    "default": [
+      {
+        "__template_key": "target",
+        "platform": "xhs",
+        "target": "620103f00000000021029b87",
+        "display_name": "阿酥在coding",
+        "enabled": true,
+        "interval_min": 15
+      },
+      {
+        "__template_key": "target",
+        "platform": "github",
+        "target": "LofiSu",
+        "display_name": "LofiSu",
+        "enabled": true,
+        "interval_min": 10
+      },
+      {
+        "__template_key": "target",
+        "platform": "x",
+        "target": "su_lofi",
+        "display_name": "@su_lofi",
+        "enabled": true,
+        "interval_min": 15
+      }
+    ],
+    "templates": {
+      "target": {
+        "name": "盯住的账号",
+        "display_item": "display_name",
+        "items": {
+          "platform": {
+            "type": "string",
+            "description": "平台",
+            "options": ["xhs", "github", "x"],
+            "default": "github"
+          },
+          "target": {
+            "type": "string",
+            "description": "GitHub login / X handle / 小红书 24 位 user_id",
+            "default": ""
+          },
+          "display_name": {
+            "type": "string",
+            "description": "显示名",
+            "default": ""
+          },
+          "enabled": {
+            "type": "bool",
+            "description": "启用",
+            "default": true
+          },
+          "interval_min": {
+            "type": "int",
+            "description": "轮询间隔（分钟）",
+            "default": 15
+          },
+          "include": {
+            "type": "list",
+            "description": "只推包含这些词（空=不过滤）",
+            "default": []
+          },
+          "exclude": {
+            "type": "list",
+            "description": "排除包含这些词",
+            "default": []
+          },
+          "push_events": {
+            "type": "list",
+            "description": "GitHub 事件白名单；空=默认策略（Push 聚合，其余即时）",
+            "default": []
+          }
+        }
+      }
+    }
+  },
+  "push_sessions": {
+    "type": "list",
+    "description": "定时推送会话（可多选）",
+    "default": [],
+    "_special": "umo"
+  },
+  "allow_users": {
+    "type": "list",
+    "description": "允许使用指令的发送者（空=所有人）",
+    "default": [],
+    "_special": "sender_id"
+  },
+  "timezone": {
+    "type": "string",
+    "description": "quiet_hours 使用的时区（IANA，例如 Asia/Shanghai）",
+    "default": "Asia/Shanghai"
+  },
+  "quiet_hours": {
+    "type": "string",
+    "description": "静默时段，例如 23:00-08:00；留空=不静默",
+    "default": ""
+  },
+  "max_pushes_per_hour": {
+    "type": "int",
+    "description": "每目标每小时最多推送条数（超出合并）",
+    "default": 6
+  },
+  "card_enabled": {
+    "type": "bool",
+    "description": "发送本地 Pillow 卡片；字体缺失时自动降级文本",
+    "default": true
+  },
+  "card_font_path": {
+    "type": "string",
+    "description": "中文字体路径（留空自动查找；本机实测 C:/Windows/Fonts/msyh.ttc 可用）",
+    "default": ""
+  },
+  "card_max_items": {
+    "type": "int",
+    "description": "单张卡片最多条目数",
+    "default": 5
+  },
+  "daily_push_limit": {
+    "type": "int",
+    "description": "每会话每日推送上限（超出合并为汇总）",
+    "default": 30
+  },
+  "summary_enabled": {
+    "type": "bool",
+    "description": "推送和查询时生成 AI 摘要",
+    "default": true
+  },
+  "summary_api_base": {
+    "type": "string",
+    "description": "AI 摘要的 OpenAI 兼容地址（留空使用 AstrBot 当前模型）",
+    "default": ""
+  },
+  "summary_api_key": {
+    "type": "string",
+    "description": "AI 摘要 API Key（留空使用 AstrBot 当前模型）",
+    "default": "",
+    "secret": true
+  },
+  "summary_model": {
+    "type": "string",
+    "description": "AI 摘要模型名（使用自定义 Key 时）",
+    "default": "gpt-4o-mini"
+  },
+  "summary_max_chars": {
+    "type": "int",
+    "description": "摘要最大字数",
+    "default": 300
+  },
+  "search_enabled": {
+    "type": "bool",
+    "description": "允许 /feed search；使用当前已配置的 OpenAI 兼容模型自带联网搜索",
+    "default": true
+  },
+  "search_builtin_fallback": {
+    "type": "bool",
+    "description": "优先使用 AstrBot 已配置的内置搜索工具（Tavily/Bocha/Brave 等）；未配置或失败时再用当前模型",
+    "default": true
+  },
+  "search_max_results": {
+    "type": "int",
+    "description": "期望返回的搜索结果条数（3-5）",
+    "default": 5
+  }
+}

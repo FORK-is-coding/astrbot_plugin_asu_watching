@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>阿酥盯盘器</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <div>
+          <h1>阿酥盯盘器</h1>
+          <p class="slogan">学习酥思想，争做酥青年，加入校招大乱斗！</p>
+        </div>
+        <div class="actions">
+          <button id="check-all" class="btn primary">检查全部</button>
+          <button id="refresh" class="btn">刷新</button>
+        </div>
+      </header>
+
+      <p id="global-message" class="message"></p>
+
+      <div class="workspace">
+        <nav class="side-nav">
+          <button class="nav-item active" data-view="feed">动向</button>
+          <button class="nav-item" data-view="subs">订阅</button>
+          <button class="nav-item" data-view="xhs">小红书</button>
+          <button class="nav-item" data-view="api">API 配置</button>
+        </nav>
+
+        <div class="content">
+          <section class="view-panel active" data-view-panel="feed">
+            <div class="section-head">
+              <h2>盯住的账号</h2>
+              <button id="add-target" class="btn">添加目标</button>
+            </div>
+            <div id="targets" class="targets"></div>
+          </section>
+
+          <section class="view-panel" data-view-panel="subs">
+            <div class="card">
+              <div class="section-head">
+                <h2>订阅</h2>
+                <button id="add-subscription" class="btn primary">添加会话 ID</button>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr><th>会话</th><th>目标</th><th>状态</th><th>最后推送</th><th>错误</th><th>操作</th></tr>
+                </thead>
+                <tbody id="subscriptions"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="view-panel" data-view-panel="xhs">
+            <div class="card">
+              <div class="card-head">
+                <h2>小红书登录</h2>
+                <span id="xhs-state" class="badge">未登录</span>
+              </div>
+              <div class="xhs-grid">
+                <div>
+                  <p class="muted">小红书不提供可用的扫码接口，请直接粘贴 Cookie。</p>
+                  <div class="actions">
+                    <button id="xhs-logout" class="btn">退出登录</button>
+                  </div>
+                </div>
+                <div>
+                  <p class="muted">或粘贴浏览器里已登录小红书的 Cookie：</p>
+                  <textarea id="xhs-cookie" rows="4" placeholder="web_session=...; a1=...; webId=..."></textarea>
+                  <button id="xhs-save-cookie" class="btn primary">保存 Cookie</button>
+                </div>
+              </div>
+              <p id="xhs-message" class="message"></p>
+            </div>
+          </section>
+
+          <section class="view-panel" data-view-panel="api">
+            <div class="card">
+              <div class="card-head">
+                <h2>API / 模型配置</h2>
+              </div>
+              <div class="config-grid">
+                <label>GitHub Token
+                  <input id="cfg-github" type="password" autocomplete="off" placeholder="留空不修改" />
+                </label>
+                <label>X 数据源
+                  <select id="cfg-x-provider">
+                    <option value="fxtwitter">FxTwitter（免费）</option>
+                    <option value="x_api">X API（Bearer）</option>
+                  </select>
+                </label>
+                <label>X Bearer Token
+                  <input id="cfg-x-bearer" type="password" autocomplete="off" placeholder="留空不修改" />
+                </label>
+                <label>RSSHub 地址
+                  <input id="cfg-rsshub" placeholder="https://rsshub.example.com" />
+                </label>
+                <label>RSSHub Access Key
+                  <input id="cfg-rsshub-key" type="password" autocomplete="off" placeholder="留空不修改" />
+                </label>
+                <label class="inline">
+                  <input id="cfg-summary" type="checkbox" />
+                  启用 AI 摘要
+                </label>
+                <label>摘要 API Base
+                  <input id="cfg-summary-base" placeholder="留空使用 AstrBot 当前模型" />
+                </label>
+                <label>摘要 API Key
+                  <input id="cfg-summary-key" type="password" autocomplete="off" placeholder="留空不修改" />
+                </label>
+                <label>摘要模型
+                  <input id="cfg-summary-model" placeholder="gpt-4o-mini" />
+                </label>
+              </div>
+              <div class="actions">
+                <button id="cfg-save" class="btn primary">保存配置</button>
+              </div>
+              <p id="cfg-message" class="message"></p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <dialog id="add-target-dialog">
+        <form method="dialog" id="add-target-form">
+          <h3>添加目标</h3>
+          <label>平台
+            <select id="target-platform">
+              <option value="github">GitHub</option>
+              <option value="x">X</option>
+              <option value="xhs">小红书</option>
+            </select>
+          </label>
+          <label>账号 / ID / 链接
+            <input id="target-id" required placeholder="LofiSu / su_lofi / 620103f..." />
+          </label>
+          <label>显示名
+            <input id="target-name" placeholder="可选" />
+          </label>
+          <label>间隔（分钟）
+            <input id="target-interval" type="number" min="1" value="15" />
+          </label>
+          <div class="actions">
+            <button type="button" class="btn" data-close-dialog="1">取消</button>
+            <button id="target-submit" value="default" class="btn primary">添加</button>
+          </div>
+        </form>
+      </dialog>
+
+      <dialog id="add-subscription-dialog">
+        <form method="dialog" id="add-subscription-form">
+          <h3>添加会话 ID</h3>
+          <p class="muted">会订阅当前全部盯住账号（阿酥在coding / LofiSu / @su_lofi）。</p>
+          <label>会话 UMO
+            <input id="sub-umo" required placeholder="例如 aiocqhttp:GroupMessage:123456" />
+          </label>
+          <p class="muted">只推这个会话，不影响配置页的 push_sessions。</p>
+          <div class="actions">
+            <button type="button" class="btn" data-close-dialog="1">取消</button>
+            <button id="sub-submit" value="default" class="btn primary">添加</button>
+          </div>
+        </form>
+      </dialog>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

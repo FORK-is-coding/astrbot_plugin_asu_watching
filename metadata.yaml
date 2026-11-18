@@ -1,0 +1,12 @@
+name: astrbot_plugin_creator_feed
+display_name: 阿酥盯盘器
+desc: 订阅小红书、GitHub、X 创作者的最新动向，支持 QQ 指令、WebUI 面板与图片卡片推送。
+short_desc: 阿酥盯盘：多平台动向、AI 摘要与推送
+version: 0.1.0
+author: LofiSu
+repo: https://github.com/FORK-is-coding/AsuWatching
+astrbot_version: ">=4.29,<5"
+support_platforms:
+  - aiocqhttp
+  - qq_official
+  - qq_official_webhook

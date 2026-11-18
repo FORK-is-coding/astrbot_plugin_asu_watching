@@ -1,0 +1,70 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #1d2129;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #3c96ca;
+  --danger: #d64545;
+}
+
+html[data-theme="dark"] body,
+body.dark {
+  --bg: #17181c;
+  --card: #23252b;
+  --text: #e8eaed;
+  --muted: #9aa0aa;
+  --border: #34363d;
+}
+
+* { box-sizing: border-box; }
+body { overflow-x: hidden; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+.page { max-width: 1080px; margin: 0 auto; padding: 24px; }
+.header, .card-head, .section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.header { margin-bottom: 12px; }
+.workspace { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 20px; align-items: start; }
+.side-nav { display: flex; flex-direction: column; gap: 6px; position: sticky; top: 16px; }
+.nav-item { text-align: left; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); cursor: pointer; font-size: 14px; }
+.nav-item.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.content { min-width: 0; overflow-x: hidden; }
+.view-panel { display: none; }
+.view-panel.active { display: block; }
+@media (max-width: 900px) { .workspace { grid-template-columns: 1fr; } .side-nav { flex-direction: row; flex-wrap: wrap; position: static; } }
+h1 { font-size: 22px; margin: 0 0 4px; }
+h2 { font-size: 16px; margin: 0; }
+.muted { color: var(--muted); margin: 4px 0; }
+.slogan { color: var(--primary); font-size: 14px; font-weight: 600; margin: 2px 0 4px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { border: 1px solid var(--border); background: var(--card); color: var(--text); padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.badge { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--border); color: var(--muted); }
+.badge.ok { background: #e6f6ec; color: #237a46; }
+.badge.warn { background: #fdf0e6; color: #a35a1f; }
+.targets { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.target { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; min-width: 0; overflow: hidden; }
+.target h3 { margin: 0 0 6px; font-size: 15px; }
+.target .meta { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; word-break: break-word; }
+.target .summary { margin: 8px 0; padding: 8px 10px; overflow-wrap: anywhere; word-break: break-word; background: #f2f7fb; color: #2f4a5e; border-radius: 6px; font-size: 13px; }
+.target .items { margin: 8px 0; padding-left: 18px; font-size: 13px; overflow-wrap: anywhere; word-break: break-word; }
+.target .items a { color: var(--primary); text-decoration: none; overflow-wrap: anywhere; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; border-bottom: 1px solid var(--border); padding: 8px 4px; font-size: 13px; }
+.qr-box img { max-width: 180px; margin-top: 8px; display: block; }
+.xhs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.config-grid label.inline { display: flex; align-items: center; gap: 8px; }
+.config-grid input[type=checkbox] { width: auto; }
+textarea, input, select { width: 100%; padding: 7px 9px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); color: var(--text); }
+label { display: block; margin: 10px 0; font-size: 13px; }
+dialog { border: 1px solid var(--border); border-radius: 10px; background: var(--card); color: var(--text); padding: 18px; }
+.message { min-height: 20px; color: var(--danger); font-size: 13px; }
+.message.ok { color: #237a46; }
